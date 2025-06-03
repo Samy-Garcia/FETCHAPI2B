@@ -108,3 +108,7 @@ async function eliminarRegistros(id) {  //Se pide ID para borrar
         ObtenerPersonas(); //PARA TENER LA LISTA ACTUALIZADA
     }
 }
+
+//TQM profesor
+
+//amo a una linda niña "A"
