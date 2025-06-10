@@ -30,7 +30,7 @@ function CrearTabla(datos){//"Datos" respresenta al JSON que viene de la api
             <td>${persona.Edad}</td>
             <td>${persona.Correo}</td>
         <td> 
-            <button>Editar</button>
+            <button onclick="AbrirModalEditar(${persona.id}, '${persona.Nombre}', '${persona.Apellido}', ${persona.Edad}, '${persona.Correo}')">Editar</button>
             <button onClick="eliminarRegistros(${persona.id})">Eliminar</button>
         </td>
         </tr>
@@ -109,6 +109,55 @@ async function eliminarRegistros(id) {  //Se pide ID para borrar
     }
 }
 
-//TQM profesor
 
-//amo a una linda niña "A"
+//Proceso para Editar reguistros
+const modalEditar = document.getElementById("modalEditar"); //Modal
+const btnCerrarEditar = document.getElementById("btnCerrarEditar");//X Para crrar
+
+//EventeLitener para Cerrar el Modal sw Editar
+btnCerrarEditar.addEventListener("click", ()=>{
+    modalEditar.close(); //Cerrar modalEditar
+});
+
+function AbrirModalEditar(id, nombre, apellido, edad, correo){
+    document.getElementById("idEditar").value = id; //El id Esta oculto, pero debe estar presente
+    document.getElementById("nombreEditar").value = nombre;
+    document.getElementById("apellidoEditar").value = apellido;
+    document.getElementById("edadEditar").value = edad;
+    document.getElementById("emailEditar").value = correo;
+    
+    modalEditar.showModal(); 
+}
+
+document.getElementById("frmEditarIntegrante").addEventListener("submit", async e => {
+    e.preventDefault(); //Evitamos que los datos e envien de nmedianto
+
+    const id = document.getElementById("idEditar").value;
+    const Nombre = document.getElementById("nombreEditar").value.trim();
+    const Apellido = document.getElementById("apellidoEditar").value.trim();
+    const Edad = document.getElementById("edadEditar").value.trim();
+    const Correo = document.getElementById("emailEditar").value.trim();
+
+    if(!id || !Nombre || !Apellido || !Edad || !Correo ){
+        alert("No sea TONOTO complete todos los campos");
+        return;
+    }
+
+    const respuesta = await fetch(`${API_URL}/${id}`, {
+        method: 'PUT', 
+        headers: {"Content-Type" : "application/json"},
+        body: JSON.stringify({Edad, Correo, Nombre, Apellido})
+    });
+
+    if(respuesta.ok){
+        alert("Reguistro Actualizado Correctamente");
+        modalEditar.close();
+        ObtenerPersonas();
+    }else{
+        alert("Error al Actualizar");
+    }
+    
+});
+
+
+

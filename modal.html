@@ -11,6 +11,7 @@
 >
 </head>
 <body>
+    <!--Modal para Agregar-->
     <dialog id="modalAgregar" open>
         <article>
             <header>
@@ -24,7 +25,25 @@
                 <input type="email" id="email" placeholder="Correo electrónico" required>
                 
                 <button type="submit" class="contrast">Guardar</button>
-tiene menú contextual
+
+            </form>
+        </article>
+    </dialog>
+
+    <!--modal para Editar-->
+    <dialog id="modalEditar" open>
+        <article>
+            <header>
+                <a href="#" class="close" id="btnCerrarEditar"></a>
+                <h3>Editar Integarnte</h3>
+            </header>
+            <form id="frmEditarIntegrante">
+                <input type="hidden" id="idEditar">
+                <input type="text" id="nombreEditar" placeholder="Nombre" required>
+                <input type="text" id="apellidoEditar" placeholder="Apellido" required>
+                <input type="number" placeholder="Edad" id="edadEditar" required>
+                <input type="email" id="emailEditar" placeholder="Correo electrónico" required>
+                <button type="submit" class="contrast">Guardar</button>
             </form>
         </article>
     </dialog>
